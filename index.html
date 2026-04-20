@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naša svadba | Nina & Samuel</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5eee7;
+      --bg-deep: #eadbce;
+      --sand: #d8c1ad;
+      --clay: #bf8f6f;
+      --terracotta: #a96f53;
+      --olive: #7b8167;
+      --brown: #5b463c;
+      --text: #4d4039;
+      --muted: #8f7d73;
+      --card: rgba(255, 250, 246, 0.72);
+      --line: rgba(169, 111, 83, 0.20);
+      --shadow: 0 16px 38px rgba(91, 70, 60, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216, 193, 173, 0.45), transparent 28%),
+        radial-gradient(circle at top right, rgba(234, 219, 206, 0.65), transparent 22%),
+        linear-gradient(180deg, #f8f2ec 0%, var(--bg) 100%);
+      text-align: center;
+      padding: 28px 18px 72px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .sun-shape {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,193,173,0.85) 0%, rgba(216,193,173,0.18) 62%, transparent 63%);
+      position: absolute;
+      top: -8px;
+      right: 8px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .leaf-left,
+    .leaf-right {
+      position: absolute;
+      width: 110px;
+      height: 150px;
+      pointer-events: none;
+      opacity: 0.48;
+    }
+
+    .leaf-left {
+      left: -4px;
+      top: 120px;
+    }
+
+    .leaf-right {
+      right: -4px;
+      top: 500px;
+      transform: scaleX(-1);
+    }
+
+    .leaf-left::before,
+    .leaf-left::after,
+    .leaf-right::before,
+    .leaf-right::after {
+      content: "";
+      position: absolute;
+      background: linear-gradient(180deg, #ccb19a 0%, #dbc7b7 100%);
+      border-radius: 100% 0 100% 0;
+    }
+
+    .leaf-left::before,
+    .leaf-right::before {
+      width: 38px;
+      height: 78px;
+      left: 26px;
+      top: 10px;
+      transform: rotate(-18deg);
+      box-shadow:
+        24px 18px 0 0 #d4baa4,
+        12px 64px 0 0 #dfcdbf;
+    }
+
+    .leaf-left::after,
+    .leaf-right::after {
+      width: 2px;
+      height: 126px;
+      left: 20px;
+      top: 16px;
+      background: #c4a087;
+      transform: rotate(-15deg);
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .top-note::before,
+    .top-note::after {
+      content: "";
+      width: 46px;
+      height: 1px;
+      background: rgba(123, 129, 103, 0.30);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 70px;
+      line-height: 0.96;
+      font-weight: 500;
+      color: var(--brown);
+      letter-spacing: 1px;
+    }
+
+    .and {
+      display: block;
+      margin: 6px 0;
+      font-size: 34px;
+      color: var(--terracotta);
+    }
+
+    .date {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .intro {
+      max-width: 540px;
+      margin: 18px auto 0;
+      font-size: 18px;
+      line-height: 1.85;
+    }
+
+    .hero-wrap {
+      margin: 42px auto 28px;
+      padding: 14px;
+      background: rgba(255, 248, 242, 0.58);
+      border: 1px solid rgba(191, 143, 111, 0.18);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image {
+      width: 100%;
+      display: block;
+      border-radius: 28px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: linear-gradient(135deg, #ebddd0 0%, #dcc1ad 100%);
+    }
+
+    .rsvp-section {
+      margin: 0 0 34px;
+    }
+
+    .rsvp-note {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .btn-rsvp {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: linear-gradient(180deg, #b98465 0%, #a96f53 100%);
+      color: #fffaf6;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      box-shadow: 0 14px 28px rgba(169, 111, 83, 0.18);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-rsvp:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 34px rgba(169, 111, 83, 0.24);
+    }
+
+    .story-card {
+      max-width: 680px;
+      margin: 0 auto 36px;
+      background: var(--card);
+      border: 1px solid rgba(191, 143, 111, 0.16);
+      border-radius: 40px 40px 18px 18px;
+      padding: 30px 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .story-title {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      color: var(--brown);
+      font-weight: 500;
+    }
+
+    .story-text {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.95;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .button {
+      cursor: pointer;
+      border: 1px solid rgba(191, 143, 111, 0.18);
+      background: rgba(255, 248, 242, 0.55);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+
+    .button:hover,
+    .button.active {
+      color: var(--brown);
+      background: rgba(255, 250, 246, 0.92);
+      border-color: rgba(169, 111, 83, 0.30);
+      box-shadow: 0 10px 22px rgba(169, 111, 83, 0.08);
+    }
+
+    .divider {
+      width: 100%;
+      max-width: 300px;
+      height: 1px;
+      margin: 26px auto 10px;
+      background: linear-gradient(90deg, transparent 0%, rgba(169,111,83,0.28) 18%, rgba(169,111,83,0.28) 82%, transparent 100%);
+    }
+
+    .content {
+      display: none;
+      margin-top: 24px;
+      padding: 28px 22px;
+      background: var(--card);
+      border: 1px solid rgba(191, 143, 111, 0.16);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .content.active-content {
+      display: block;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 500;
+      color: var(--brown);
+    }
+
+    .section-intro {
+      max-width: 560px;
+      margin: 0 auto 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      text-align: left;
+    }
+
+    .place-card {
+      background: rgba(255, 250, 246, 0.84);
+      border: 1px solid rgba(191, 143, 111, 0.18);
+      border-radius: 24px;
+      padding: 18px;
+      min-height: 186px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .place-type {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 8px;
+    }
+
+    .place-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      line-height: 1.05;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .place-note {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #6d5d55;
+      margin-bottom: 16px;
+    }
+
+    .place-link {
+      align-self: flex-start;
+      text-decoration: none;
+      color: var(--terracotta);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(169, 111, 83, 0.34);
+      padding-bottom: 2px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 94px 1fr;
+      gap: 16px;
+      align-items: start;
+      background: rgba(255, 250, 246, 0.84);
+      border: 1px solid rgba(191, 143, 111, 0.18);
+      border-radius: 22px;
+      padding: 16px 18px;
+    }
+
+    .timeline-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 31px;
+      line-height: 1;
+      color: var(--terracotta);
+    }
+
+    .timeline-text {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .menu-list,
+    .info-list {
+      display: grid;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .menu-item,
+    .info-item {
+      background: rgba(255, 250, 246, 0.84);
+      border: 1px solid rgba(191, 143, 111, 0.18);
+      border-radius: 22px;
+      padding: 16px 18px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .dress-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: rgba(255, 250, 246, 0.84);
+      border: 1px solid rgba(191, 143, 111, 0.18);
+      border-radius: 28px;
+      padding: 24px 18px;
+    }
+
+    .palette {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 10px 0 18px;
+    }
+
+    .color-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(91, 70, 60, 0.08);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.45);
+    }
+
+    .dress-main {
+      margin: 4px 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      color: var(--brown);
+    }
+
+    .dress-note {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #6d5d55;
+    }
+
+    .footer-note {
+      margin-top: 34px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .places-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 56px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 18px 14px 56px;
+      }
+
+      .sun-shape {
+        width: 88px;
+        height: 88px;
+        top: -2px;
+        right: 4px;
+      }
+
+      .leaf-left,
+      .leaf-right {
+        width: 82px;
+        height: 110px;
+        opacity: 0.34;
+      }
+
+      h1 {
+        font-size: 46px;
+      }
+
+      .intro,
+      .story-text,
+      .timeline-text,
+      .menu-item,
+      .info-item,
+      .dress-note {
+        font-size: 15px;
+      }
+
+      .hero-wrap,
+      .story-card,
+      .content {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 76px 1fr;
+        gap: 12px;
+      }
+
+      .timeline-time {
+        font-size: 27px;
+      }
+
+      .place-name {
+        font-size: 25px;
+      }
+
+      .button {
+        width: calc(50% - 8px);
+        padding: 11px 10px;
+      }
+    }
+  </style>
+
+  <script>
+    function toggle(id) {
+      const sections = ["miesta", "harmonogram", "menu", "dresscode", "info"];
+      const buttons = document.querySelectorAll(".button");
+
+      sections.forEach(section => {
+        const el = document.getElementById(section);
+        if (!el) return;
+
+        if (section === id) {
+          const willOpen = !el.classList.contains("active-content");
+          el.classList.toggle("active-content", willOpen);
+        } else {
+          el.classList.remove("active-content");
+        }
+      });
+
+      buttons.forEach(button => {
+        const target = button.dataset.target;
+        const section = document.getElementById(target);
+        const isActive = section && section.classList.contains("active-content");
+        button.classList.toggle("active", isActive);
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="sun-shape"></div>
+    <div class="leaf-left"></div>
+    <div class="leaf-right"></div>
+
+    <div class="container">
+      <div class="top-note">Boho Warm Earth</div>
+
+      <h1>
+        Nina
+        <span class="and">&</span>
+        Samuel
+      </h1>
+
+      <div class="date">4. september 2027</div>
+
+      <p class="intro">
+        Vitajte na našej svadobnej stránke. Tešíme sa na deň plný lásky, slnka, hudby a spoločných chvíľ s vami.
+      </p>
+
+      <div class="hero-wrap">
+        <img class="hero-image" src="boho-hero.jpg" alt="Boho svadobná fotografia v teplých prírodných tónoch">
+      </div>
+
+      <div class="rsvp-section">
+        <div class="rsvp-note">Prosíme o potvrdenie vašej účasti do 10.8.2027</div>
+        <a class="btn-rsvp" href="https://example.com" target="_blank" rel="noopener noreferrer">Potvrdiť účasť</a>
+      </div>
+
+      <div class="story-card">
+        <h2 class="story-title">Náš príbeh</h2>
+        <p class="story-text">
+          Náš príbeh sa začal úplne prirodzene — jedným stretnutím, ktoré sa časom zmenilo na domov,
+          pokoj, smiech a život, ktorý chceme zdieľať. Budeme šťastní, ak náš deň oslávite spolu s nami
+          v uvoľnenej, teplej a láskyplnej atmosfére.
+        </p>
+      </div>
+
+      <div class="buttons">
+        <button class="button" data-target="miesta" onclick="toggle('miesta')">Miesta</button>
+        <button class="button" data-target="harmonogram" onclick="toggle('harmonogram')">Harmonogram</button>
+        <button class="button" data-target="menu" onclick="toggle('menu')">Menu</button>
+        <button class="button" data-target="dresscode" onclick="toggle('dresscode')">Dress code</button>
+        <button class="button" data-target="info" onclick="toggle('info')">Info</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div id="miesta" class="content">
+        <h2 class="section-title">Miesta</h2>
+        <p class="section-intro">
+          Prehľad všetkých dôležitých miest svadobného dňa nájdete nižšie.
+        </p>
+
+        <div class="places-grid">
+          <div class="place-card">
+            <div>
+              <div class="place-type">Obrad</div>
+              <div class="place-name">Olive Grove</div>
+              <div class="place-note">Komorný obrad v exteriéri s výhľadom na prírodu.</div>
+            </div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+
+          <div class="place-card">
+            <div>
+              <div class="place-type">Hostina</div>
+              <div class="place-name">Casa Terra</div>
+              <div class="place-note">Večera, hudba a oslava v teplom boho štýle.</div>
+            </div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+
+          <div class="place-card">
+            <div>
+              <div class="place-type">Ubytovanie</div>
+              <div class="place-name">Earthside Rooms</div>
+              <div class="place-note">Odporúčané ubytovanie pre hostí v blízkosti oslavy.</div>
+            </div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+
+          <div class="place-card">
+            <div>
+              <div class="place-type">After party</div>
+              <div class="place-name">Bonfire Corner</div>
+              <div class="place-note">Voľné pokračovanie večera pri svetlách a hudbe.</div>
+            </div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="harmonogram" class="content">
+        <h2 class="section-title">Harmonogram</h2>
+        <p class="section-intro">
+          Orientačný časový plán nášho svadobného dňa.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">14:30</div>
+            <div class="timeline-text">Príchod hostí a welcome drink</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">15:30</div>
+            <div class="timeline-text">Obrad</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">17:00</div>
+            <div class="timeline-text">Spoločné fotenie a oddych</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">18:30</div>
+            <div class="timeline-text">Svadobná večera</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">20:30</div>
+            <div class="timeline-text">Hudba, tanec a večerná oslava</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="menu" class="content">
+        <h2 class="section-title">Menu</h2>
+        <p class="section-intro">
+          To najlepšie z nášho svadobného večera.
+        </p>
+
+        <div class="menu-list">
+          <div class="menu-item">Zdieľané predjedlá a sezónne chuťovky</div>
+          <div class="menu-item">Krémová polievka s bylinkami</div>
+          <div class="menu-item">Hlavný chod podľa výberu hostí</div>
+          <div class="menu-item">Svadobná torta, dezerty a večerný snack</div>
+        </div>
+      </div>
+
+      <div id="dresscode" class="content">
+        <h2 class="section-title">Dress code</h2>
+        <p class="section-intro">
+          Budeme radi, ak sa naladíte na prírodnú, teplú a uvoľnene elegantnú atmosféru.
+        </p>
+
+        <div class="dress-card">
+          <div class="palette">
+            <div class="color-dot" style="background:#efe2d2;"></div>
+            <div class="color-dot" style="background:#d8c1ad;"></div>
+            <div class="color-dot" style="background:#c59e7f;"></div>
+            <div class="color-dot" style="background:#a96f53;"></div>
+            <div class="color-dot" style="background:#7b8167;"></div>
+            <div class="color-dot" style="background:#5b463c;"></div>
+          </div>
+
+          <div class="dress-main">Boho earthy formal</div>
+          <div class="dress-note">
+            Dámy: šaty z prírodných materiálov, jemné vzory, teplé neutrálne tóny<br>
+            Páni: ľahší oblek, košeľa, zemité farby a uvoľnená elegancia
+          </div>
+        </div>
+      </div>
+
+      <div id="info" class="content">
+        <h2 class="section-title">Dôležité informácie</h2>
+        <p class="section-intro">
+          Praktické detaily pre pohodový priebeh celého dňa.
+        </p>
+
+        <div class="info-list">
+          <div class="info-item">Časť programu prebehne v exteriéri, odporúčame pohodlnú obuv.</div>
+          <div class="info-item">Ak máte špeciálne stravovacie požiadavky, prosíme uveďte ich vo formulári RSVP.</div>
+          <div class="info-item">Večerná časť oslavy bude pokračovať v uvoľnenejšej atmosfére.</div>
+          <div class="info-item">V prípade otázok nás môžete kontaktovať kedykoľvek vopred.</div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        S láskou vytvorené pre svadobné portfólio · boho warm earth concept
+      </div>
+    </div>
+  </div>
+</body>
+</html>
