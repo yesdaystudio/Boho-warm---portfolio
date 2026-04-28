@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naša svadba | Lea & Jakub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f4ede4;
+      --bg-soft: #fbf7f2;
+      --sand: #d8c2ab;
+      --clay: #c1906d;
+      --terracotta: #a8684f;
+      --olive: #7d8168;
+      --brown: #57443b;
+      --muted: #8f7c72;
+      --card: rgba(255, 249, 242, 0.78);
+      --line: rgba(168, 104, 79, 0.18);
+      --shadow: 0 18px 44px rgba(87, 68, 59, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(216,194,171,0.45), transparent 26%),
+        radial-gradient(circle at top right, rgba(193,144,109,0.16), transparent 18%),
+        linear-gradient(180deg, #f8f3ee 0%, var(--bg) 100%);
+      color: var(--brown);
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding: 24px 16px 72px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      max-width: 950px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .sun {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(216,194,171,0.95) 0%, rgba(216,194,171,0.40) 46%, transparent 47%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .blob-left,
+    .blob-right {
+      position: absolute;
+      pointer-events: none;
+      filter: blur(2px);
+      opacity: 0.75;
+    }
+
+    .blob-left {
+      top: 90px;
+      left: -10px;
+      width: 140px;
+      height: 220px;
+      background: rgba(193, 144, 109, 0.14);
+      border-radius: 58% 42% 47% 53% / 38% 44% 56% 62%;
+      transform: rotate(-18deg);
+    }
+
+    .blob-right {
+      top: 420px;
+      right: -18px;
+      width: 130px;
+      height: 200px;
+      background: rgba(125, 129, 104, 0.12);
+      border-radius: 44% 56% 63% 37% / 48% 40% 60% 52%;
+      transform: rotate(16deg);
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: rgba(125, 129, 104, 0.4);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 74px;
+      line-height: 0.94;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--brown);
+    }
+
+    .and {
+      display: block;
+      margin: 6px 0;
+      font-size: 34px;
+      color: var(--terracotta);
+    }
+
+    .date {
+      margin-top: 22px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .intro {
+      max-width: 550px;
+      margin: 18px auto 0;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--brown);
+    }
+
+    .hero-shell {
+      margin: 42px auto 28px;
+      max-width: 640px;
+      padding: 18px;
+      background: rgba(255, 248, 240, 0.58);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-arch {
+      overflow: hidden;
+      border-radius: 240px 240px 26px 26px;
+      background: linear-gradient(135deg, #eadbce 0%, #d8c2ab 100%);
+      aspect-ratio: 4 / 5;
+      max-height: 560px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .rsvp-section {
+      margin: 0 0 34px;
+    }
+
+    .rsvp-note {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .btn-rsvp {
+      display: inline-block;
+      text-decoration: none;
+      color: #fffaf6;
+      background: linear-gradient(180deg, #b77d5d 0%, #9f654b 100%);
+      border: 1px solid rgba(87, 68, 59, 0.05);
+      padding: 14px 30px;
+      border-radius: 14px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      box-shadow: 0 16px 30px rgba(168, 104, 79, 0.22);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+
+    .btn-rsvp:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 34px rgba(168, 104, 79, 0.28);
+      opacity: 0.96;
+    }
+
+
+    .calendar-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .calendar-link {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--brown);
+      background: rgba(255, 248, 240, 0.85);
+      border: 1px solid rgba(168, 104, 79, 0.20);
+      padding: 11px 15px;
+      border-radius: 12px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 8px 18px rgba(168, 104, 79, 0.06);
+      transition: all 0.24s ease;
+    }
+
+    .calendar-link:hover {
+      transform: translateY(-1px);
+      background: #fffaf6;
+      border-color: rgba(168, 104, 79, 0.34);
+    }
+
+    .rsvp-form-card {
+      display: none;
+      max-width: 620px;
+      margin: 22px auto 0;
+      padding: 24px 20px;
+      background: var(--card);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
+    .rsvp-form-card.visible { display: block; }
+
+    .rsvp-form-card h2 {
+      margin: 0 0 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 500;
+      color: var(--brown);
+      text-align: center;
+    }
+
+    .rsvp-form-card p {
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .rsvp-form-card label {
+      display: block;
+      margin-top: 14px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+
+    .rsvp-form-card input,
+    .rsvp-form-card select,
+    .rsvp-form-card textarea {
+      width: 100%;
+      margin-top: 7px;
+      padding: 12px 13px;
+      border: 1px solid rgba(168, 104, 79, 0.20);
+      border-radius: 12px;
+      background: rgba(255, 251, 246, 0.92);
+      color: var(--brown);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+    }
+
+    .rsvp-form-card textarea { min-height: 92px; resize: vertical; }
+
+    .rsvp-submit {
+      width: 100%;
+      margin-top: 18px;
+      cursor: pointer;
+      border: 0;
+      color: #fffaf6;
+      background: linear-gradient(180deg, #b77d5d 0%, #9f654b 100%);
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      box-shadow: 0 16px 30px rgba(168, 104, 79, 0.22);
+    }
+
+    .rsvp-thank-you {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      text-align: center;
+      background: rgba(255, 251, 246, 0.92);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 18px;
+      color: var(--brown);
+    }
+
+    .rsvp-thank-you.visible { display: block; }
+
+    .story-card {
+      max-width: 690px;
+      margin: 0 auto 36px;
+      padding: 30px 26px;
+      background: var(--card);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 34px 18px 34px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .story-title {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 500;
+      color: var(--brown);
+    }
+
+    .story-text {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.95;
+      color: var(--brown);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .button {
+      cursor: pointer;
+      border: 1px solid rgba(168, 104, 79, 0.20);
+      background: rgba(255, 248, 240, 0.85);
+      color: var(--brown);
+      padding: 12px 16px;
+      min-width: 126px;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.24s ease;
+      box-shadow: 0 8px 18px rgba(168, 104, 79, 0.06);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: #fffaf6;
+      border-color: rgba(168, 104, 79, 0.34);
+    }
+
+    .button.active {
+      background: linear-gradient(180deg, #c89472 0%, #ad7054 100%);
+      color: #fffaf6;
+      border-color: rgba(168, 104, 79, 0.30);
+      box-shadow: 0 12px 24px rgba(168, 104, 79, 0.18);
+    }
+
+    .divider {
+      width: 100%;
+      max-width: 320px;
+      height: 1px;
+      margin: 26px auto 10px;
+      background: linear-gradient(90deg, transparent 0%, rgba(168,104,79,0.24) 18%, rgba(168,104,79,0.24) 82%, transparent 100%);
+    }
+
+    .content {
+      display: none;
+      margin-top: 24px;
+      padding: 30px 22px;
+      background: var(--card);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.35s ease;
+    }
+
+    .content.active-content {
+      display: block;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 500;
+      color: var(--brown);
+    }
+
+    .section-intro {
+      max-width: 560px;
+      margin: 0 auto 22px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      text-align: left;
+    }
+
+    .place-card {
+      background: rgba(255, 251, 246, 0.92);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 24px 24px 12px 12px;
+      padding: 18px;
+      min-height: 196px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .place-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--sand) 0%, var(--clay) 55%, var(--olive) 100%);
+      opacity: 0.7;
+    }
+
+    .place-type {
+      margin-top: 8px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 8px;
+    }
+
+    .place-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      line-height: 1.08;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .place-note {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #6f5c53;
+      margin-bottom: 18px;
+    }
+
+    .place-link {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--terracotta);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(168, 104, 79, 0.34);
+      padding-bottom: 2px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 16px;
+      align-items: center;
+      background: rgba(255, 251, 246, 0.92);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .timeline-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      color: var(--terracotta);
+      line-height: 1;
+    }
+
+    .timeline-text {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .menu-grid,
+    .info-grid {
+      display: grid;
+      gap: 12px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .menu-item,
+    .info-item {
+      background: rgba(255, 251, 246, 0.92);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--brown);
+    }
+
+    .dress-card {
+      max-width: 580px;
+      margin: 0 auto;
+      background: rgba(255, 251, 246, 0.92);
+      border: 1px solid rgba(168, 104, 79, 0.12);
+      border-radius: 26px;
+      padding: 24px 18px;
+    }
+
+    .palette {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 8px 0 18px;
+    }
+
+    .color-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(87, 68, 59, 0.08);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
+    }
+
+    .dress-main {
+      margin: 4px 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 35px;
+      color: var(--brown);
+    }
+
+    .dress-note {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #6f5c53;
+    }
+
+    .footer-note {
+      margin-top: 34px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .places-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 58px;
+      }
+
+      .hero-shell {
+        max-width: 520px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 12px 56px;
+      }
+
+      .sun {
+        width: 78px;
+        height: 78px;
+      }
+
+      .blob-left,
+      .blob-right {
+        display: none;
+      }
+
+      h1 {
+        font-size: 46px;
+      }
+
+      .and {
+        font-size: 28px;
+      }
+
+      .intro,
+      .story-text,
+      .timeline-text,
+      .menu-item,
+      .info-item,
+      .dress-note {
+        font-size: 15px;
+      }
+
+      .story-card,
+      .content {
+        padding: 22px 16px;
+      }
+
+      .button {
+        min-width: calc(50% - 8px);
+        padding: 11px 10px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 74px 1fr;
+        gap: 12px;
+      }
+
+      .timeline-time {
+        font-size: 26px;
+      }
+
+      .place-name {
+        font-size: 25px;
+      }
+    }
+  </style>
+
+  <script>
+    function toggle(id) {
+      const sections = ["miesta", "harmonogram", "menu", "dresscode", "info"];
+      const buttons = document.querySelectorAll(".button");
+
+      sections.forEach(section => {
+        const el = document.getElementById(section);
+        if (!el) return;
+
+        if (section === id) {
+          const willOpen = !el.classList.contains("active-content");
+          el.classList.toggle("active-content", willOpen);
+        } else {
+          el.classList.remove("active-content");
+        }
+      });
+
+      buttons.forEach(button => {
+        const target = button.dataset.target;
+        const section = document.getElementById(target);
+        const isActive = section && section.classList.contains("active-content");
+        button.classList.toggle("active", isActive);
+      });
+    }
+
+
+    function openRsvpForm(event) {
+      if (event) event.preventDefault();
+      const formCard = document.getElementById('rsvp-form-card');
+      if (!formCard) return;
+      formCard.classList.add('visible');
+      formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function submitRsvpDemo(event) {
+      event.preventDefault();
+      const form = document.getElementById('rsvp-demo-form');
+      const thankYou = document.getElementById('rsvp-thank-you');
+      if (form) form.style.display = 'none';
+      if (thankYou) {
+        thankYou.classList.add('visible');
+        thankYou.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="sun"></div>
+    <div class="blob-left"></div>
+    <div class="blob-right"></div>
+
+    <div class="container">
+      <div class="eyebrow">Svadobný deň</div>
+
+      <h1>
+        Lea
+        <span class="and">&</span>
+        Jakub
+      </h1>
+
+      <div class="date">18. august 2027</div>
+
+      <p class="intro">
+        Vitajte na našej svadobnej stránke. Pozývame vás na deň plný slnka, voľnosti, hudby a lásky v teplom prírodnom duchu.
+      </p>
+
+      <div class="hero-shell">
+        <div class="hero-arch">
+          <img class="hero-image" src="boho-hero.png" alt="Boho svadobná fotografia v teplých zemitých tónoch">
+        </div>
+      </div>
+
+      <div class="rsvp-section">
+        <div class="rsvp-note">Prosíme o potvrdenie vašej účasti do 20.7.2027</div>
+        <a class="btn-rsvp" href="#rsvp-form-card" onclick="openRsvpForm(event)">Potvrdiť účasť</a>
+        <div class="calendar-actions" aria-label="Uložiť dátum do kalendára">
+          <a class="calendar-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Svadba%20Lea%20a%20Jakub&dates=20270818T130000Z/20270818T215900Z&details=Svadobny%20den%20Lea%20a%20Jakub&location=Sunfield%20Meadow%20%2F%20Terra%20House" target="_blank" rel="noopener noreferrer">Google Calendar</a>
+          <a class="calendar-link" href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0AVERSION%3A2.0%0APRODID%3A-//YesDay%20Studio//Lea%20Jakub%20Wedding//SK%0ABEGIN%3AVEVENT%0AUID%3Alea-jakub-20270818%40yesdaystudio%0ADTSTAMP%3A20260428T000000Z%0ADTSTART%3A20270818T130000Z%0ADTEND%3A20270818T215900Z%0ASUMMARY%3ASvadba%20Lea%20a%20Jakub%0ALOCATION%3ASunfield%20Meadow%20/%20Terra%20House%0ADESCRIPTION%3ASvadobny%20den%20Lea%20a%20Jakub%0AEND%3AVEVENT%0AEND%3AVCALENDAR" download="lea-jakub-svadba.ics">Apple / iCal</a>
+        </div>
+
+        <div id="rsvp-form-card" class="rsvp-form-card">
+          <h2>Potvrdenie účasti</h2>
+          <p>Prosíme, vyplňte krátky formulár. Ide o ukážkový RSVP formulár pre portfólio.</p>
+          <form id="rsvp-demo-form" onsubmit="submitRsvpDemo(event)">
+            <label for="guest-name">Meno a priezvisko</label>
+            <input id="guest-name" type="text" placeholder="Vaše meno" required>
+
+            <label for="guest-attendance">Zúčastníte sa?</label>
+            <select id="guest-attendance" required>
+              <option value="">Vyberte možnosť</option>
+              <option value="ano">Áno, prídem</option>
+              <option value="nie">Nie, nemôžem prísť</option>
+            </select>
+
+            <label for="guest-count">Počet osôb</label>
+            <input id="guest-count" type="number" min="1" max="6" placeholder="napr. 2">
+
+            <label for="guest-note">Poznámka / alergie</label>
+            <textarea id="guest-note" placeholder="Napíšte nám, čo by sme mali vedieť"></textarea>
+
+            <button class="rsvp-submit" type="submit">Odoslať RSVP</button>
+          </form>
+          <div id="rsvp-thank-you" class="rsvp-thank-you">
+            Ďakujeme, vaša odpoveď bola odoslaná. Tešíme sa na vás.
+          </div>
+        </div>
+      </div>
+
+      <div class="story-card">
+        <h2 class="story-title">O našom dni</h2>
+        <p class="story-text">
+          Predstavujeme si deň, ktorý bude prirodzený, uvoľnený a plný krásnych detailov.
+          Teplé svetlo, dlhé stoly, hudba, smiech a ľudia, ktorých máme radi.
+          Budeme šťastní, ak to všetko zažijeme spolu s vami.
+        </p>
+      </div>
+
+      <div class="buttons">
+        <button class="button" data-target="miesta" onclick="toggle('miesta')">Kde sa stretneme</button>
+        <button class="button" data-target="harmonogram" onclick="toggle('harmonogram')">Priebeh dňa</button>
+        <button class="button" data-target="menu" onclick="toggle('menu')">Menu</button>
+        <button class="button" data-target="dresscode" onclick="toggle('dresscode')">Dress code</button>
+        <button class="button" data-target="info" onclick="toggle('info')">Praktické info</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div id="miesta" class="content">
+        <h2 class="section-title">Kde sa stretneme</h2>
+        <p class="section-intro">
+          Všetky dôležité miesta nášho svadobného dňa nájdete nižšie.
+        </p>
+
+        <div class="places-grid">
+          <div class="place-card">
+            <div class="place-type">Obrad</div>
+            <div class="place-name">Sunfield Meadow</div>
+            <div class="place-note">Komorný obrad pod holým nebom v prírodnom prostredí.</div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+
+          <div class="place-card">
+            <div class="place-type">Hostina</div>
+            <div class="place-name">Terra House</div>
+            <div class="place-note">Večera, hudba a oslava v uvoľnenom prírodnom štýle.</div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+
+          <div class="place-card">
+            <div class="place-type">Ubytovanie</div>
+            <div class="place-name">Olive Rooms</div>
+            <div class="place-note">Odporúčané ubytovanie pre hostí v blízkosti oslavy.</div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+
+          <div class="place-card">
+            <div class="place-type">After party</div>
+            <div class="place-name">Campfire Corner</div>
+            <div class="place-note">Voľné pokračovanie večera pri svetlách, hudbe a víne.</div>
+            <a class="place-link" href="https://maps.google.com?q=Bratislava" target="_blank" rel="noopener noreferrer">Navigovať</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="harmonogram" class="content">
+        <h2 class="section-title">Priebeh dňa</h2>
+        <p class="section-intro">
+          Orientačný plán svadobného dňa.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">14:00</div>
+            <div class="timeline-text">Príchod hostí a welcome drink</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">15:00</div>
+            <div class="timeline-text">Obrad</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">16:30</div>
+            <div class="timeline-text">Spoločné fotenie a oddych</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">18:00</div>
+            <div class="timeline-text">Svadobná večera</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">20:00</div>
+            <div class="timeline-text">Hudba, tanec a večerná oslava</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="menu" class="content">
+        <h2 class="section-title">Menu</h2>
+        <p class="section-intro">
+          Malá ochutnávka toho, čo sme pre vás pripravili.
+        </p>
+
+        <div class="menu-grid">
+          <div class="menu-item">Zdieľané predjedlá a sezónne chuťovky</div>
+          <div class="menu-item">Jemná krémová polievka s bylinkami</div>
+          <div class="menu-item">Hlavný chod podľa výberu hostí</div>
+          <div class="menu-item">Svadobná torta, dezerty a večerný snack</div>
+        </div>
+      </div>
+
+      <div id="dresscode" class="content">
+        <h2 class="section-title">Dress code</h2>
+        <p class="section-intro">
+          Budeme radi, ak sa naladíte na zemité tóny a uvoľnenú eleganciu.
+        </p>
+
+        <div class="dress-card">
+          <div class="palette">
+            <div class="color-dot" style="background:#efe2d2;"></div>
+            <div class="color-dot" style="background:#d8c2ab;"></div>
+            <div class="color-dot" style="background:#c1906d;"></div>
+            <div class="color-dot" style="background:#a8684f;"></div>
+            <div class="color-dot" style="background:#7d8168;"></div>
+            <div class="color-dot" style="background:#57443b;"></div>
+          </div>
+
+          <div class="dress-main">Uvoľnená elegancia</div>
+          <div class="dress-note">
+            Dámy: šaty z ľahkých materiálov, prírodné textúry, pieskové a teplé tóny<br>
+            Páni: ľahší oblek, košeľa, zemité farby a nenútená elegancia
+          </div>
+        </div>
+      </div>
+
+      <div id="info" class="content">
+        <h2 class="section-title">Praktické info</h2>
+        <p class="section-intro">
+          Pár detailov, ktoré sa vám môžu hodiť.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">Časť programu prebehne vonku, odporúčame pohodlnú obuv.</div>
+          <div class="info-item">Ak máte špeciálne stravovacie požiadavky, prosíme uveďte ich vo formulári RSVP.</div>
+          <div class="info-item">Večerná oslava bude pokračovať v uvoľnenejšom štýle.</div>
+          <div class="info-item">V prípade otázok nás môžete kontaktovať vopred.</div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        S láskou vytvorené ...
+      </div>
+    </div>
+  </div>
+</body>
+</html>
